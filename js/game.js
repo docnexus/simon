@@ -5,8 +5,9 @@ var randomChosenColor;
 var complete = false;
 var userClickedPattern = [];
 var gameStarted = false;
+var endSound = new Audio("sounds/wrong.mp3");
 $(".btn").click(handleClick);
-$("body").on('keydown touchend', function() {
+$("body").on('keydown click', function() {
   if (gameStarted === false) {
     gameStarted = true;
     nextSequence();
@@ -64,8 +65,13 @@ function endGame() {
   userClickedPattern.length = 0;
   level = 0;
   $("#level-title").text("Game Over - Press any key to restart");
-  var endSound = new Audio("sounds/wrong.mp3");
-  endSound.play;
+  $("body").addClass("game-over");
+  setTimeout(function() {
+    endSound.play();
+  }, 300);
+  setTimeout(function() {
+    $("body").removeClass("game-over");
+  }, 1000);
 }
 
 function checkIfComplete() {
