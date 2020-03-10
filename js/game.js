@@ -20,7 +20,7 @@ function nextSequence() {
   level++;
   $("#level-title").text("Level " + level);
   console.log(gamePattern);
-  setTimeout(playSequence, 1000, buttonColors[randomNumber]);
+  setTimeout(playSequence, 500, buttonColors[randomNumber]);
 
 }
 
@@ -30,12 +30,9 @@ function handleClick() {
   playSound(userChosenColor);
   colorAnimation(userChosenColor);
   pressedAnimation(userChosenColor);
-  checkIfComplete();
-  checkAnswer();
-  if (complete === true) {
-    userClickedPattern.length = 0;
-    nextSequence();
-  }
+  complete = checkIfComplete();
+  checkAnswer(complete);
+
 }
 
 function playSound(input) {
@@ -55,10 +52,10 @@ function pressedAnimation(input) {
 }
 
 function playSequence(selected) {
-    playSound(selected);
-    colorAnimation(selected);
-    console.log(selected);
-  }
+  playSound(selected);
+  colorAnimation(selected);
+  console.log(selected);
+}
 
 
 function endGame() {
@@ -73,16 +70,20 @@ function endGame() {
 
 function checkIfComplete() {
   if (userClickedPattern.length < gamePattern.length) {
-    complete = false;
+    return false;
   } else if (userClickedPattern.length === gamePattern.length) {
-    complete = true;
+    return true;
   }
 }
 
-function checkAnswer() {
+function checkAnswer(complete) {
   for (i = 0; i < userClickedPattern.length; i++) {
     if (userClickedPattern[i] === gamePattern[i]) {
       console.log("success!");
+      if (complete === true) {
+        userClickedPattern.length = 0;
+        nextSequence();
+      }
     } else if (userClickedPattern[i] !== gamePattern[i]) {
       console.log("Wrong Answer");
       endGame();
