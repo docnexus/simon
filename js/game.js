@@ -6,7 +6,7 @@ var complete = false;
 var userClickedPattern = [];
 var gameStarted = false;
 $(".btn").click(handleClick);
-$("body").on('keydown touchstart', function() {
+$(document).on('keydown touchstart', function() {
   if (gameStarted === false) {
     gameStarted = true;
     nextSequence();
