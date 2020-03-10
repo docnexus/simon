@@ -7,7 +7,7 @@ var userClickedPattern = [];
 var gameStarted = false;
 var endSound = new Audio("sounds/wrong.mp3");
 $(".btn").click(handleClick);
-$("body").on('keydown', function() {
+$(".myButton").on('click', function() {
   if (gameStarted === false) {
     gameStarted = true;
     nextSequence();
@@ -71,7 +71,7 @@ function endGame() {
   setTimeout(function() {
     $("body").removeClass("game-over");
   }, 1000);
-    $("#level-title").text("Game Over - Press any key to restart");
+    $("#level-title").text("Game Over - Press Start to Restart");
 }
 
 function checkIfComplete() {
